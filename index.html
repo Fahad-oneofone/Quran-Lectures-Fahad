@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body style="background:black; color:white; font-family:sans-serif;">
+
+<h2>My PDF Library</h2>
+
+<ul id="list"></ul>
+
+<script>
+fetch("https://api.github.com/repos/Fahad-oneofone/Quran-Lectures-Fahad/contents/")
+.then(res => res.json())
+.then(data => {
+  let list = document.getElementById("list");
+  data.forEach(file => {
+    if(file.name.endsWith(".pdf")){
+      let li = document.createElement("li");
+      let a = document.createElement("a");
+      a.href = file.download_url;
+      a.textContent = file.name;
+      a.style.color = "white";
+      li.appendChild(a);
+      list.appendChild(li);
+    }
+  });
+});
+</script>
+
+</body>
+</html>
